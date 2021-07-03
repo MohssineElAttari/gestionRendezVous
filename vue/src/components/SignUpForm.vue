@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <form class="form_container" @submit.prevent="signup">
+    <form class="form_container" @submit.prevent="validation">
       <div class="form_input_container">
         <label class="form_label" for="userFirstName">First Name</label>
         <input class="form_input" type="text" v-model="userFirstName" />
@@ -24,13 +24,15 @@
 
 <script>
 import axios from "axios";
+import swal from "sweetalert";
 export default {
   data() {
     return {
       userFirstName: "",
       userLastName: "",
       userCIN: "",
-      userEmail: ""
+      userEmail: "",
+      data: undefined,
     };
   },
   methods: {
@@ -42,15 +44,28 @@ export default {
           userFirstName: this.userFirstName,
           userLastName: this.userLastName,
           userCIN: this.userCIN,
-          userEmail: this.userEmail
+          userEmail: this.userEmail,
         }
       );
-      alert(res.data.message);
-      if (res.data.state) {
-        console.log(res.data.reference);
+      console.log(res.data.state);
+      return res.data;
+    },
+    async validation() {
+      this.data = await this.signup();
+      if (this.data.state == "vide") {
+        swal("failed !", "please fill all the fields!", "warning");
+      } else {
+        sessionStorage.setItem("reference",this.data.reference);
+        swal(
+          "Good job!",
+          "Congratulations ! Your information has been registered ! \n\n\n reference :" +
+            this.data.reference,
+          "success"
+        );
+        this.$router.push('/Authentification');
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -64,7 +79,7 @@ export default {
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  border: 1px dashed #42b983;
+  border: 1px solid #000000;
   border-radius: 20px;
   padding: 20px 30px;
   width: 25%;
@@ -83,16 +98,16 @@ export default {
   padding: 10px 5px;
   margin: 5px auto;
   border: 0 none #ccc;
-  border-bottom: 2px solid #42b983;
+  border-bottom: 2px solid #092dfa;
 }
 .form_input:focus {
-  border: 2px solid #42b983;
+  border: 2px solid #1e2c7e;
   outline: none;
 }
 .form_button {
   display: block;
   padding: 10px 20px;
-  background-color: #42b983;
+  background-color: #092dfa;
   border: none;
   border-radius: 20px;
 }

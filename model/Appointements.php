@@ -124,7 +124,7 @@ class Appointements
     public function checkAvailableTimes($date)
     {
 
-        $query = "SELECT start_at, end_at FROM timeslots WHERE NOT EXISTS (SELECT * FROM appointements WHERE appointements.timeslot_id_fk = timeslots.timeslot_id AND appointements.c_date = :c_date);";
+        $query = "SELECT * FROM timeslots WHERE NOT EXISTS (SELECT * FROM appointements WHERE appointements.timeslot_id_fk = timeslots.timeslot_id AND appointements.c_date = :c_date);";
         /* $date = new DateTime($this->c_date);
         $result = $date->format('Y-m-d'); */
         // prepare the query

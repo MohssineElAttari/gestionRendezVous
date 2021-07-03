@@ -2,9 +2,11 @@
   <div id="nav">
     <router-link to="/">Home</router-link> |
     <router-link to="/about">About</router-link> |
-    <router-link to="/SignUp">SignUp</router-link>
-  </div>
+    <router-link to="/SignUp">SignUp</router-link> | 
+    <router-link to="/Authentification">Authentication</router-link> | 
+    <router-link to="/Appointement">Appointement</router-link>
   <router-view/>
+  </div>
 </template>
 
 <style>

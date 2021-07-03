@@ -21,8 +21,24 @@ const routes = [{
         // this generates a separate chunk (about.[hash].js) for this route
         // which is lazy-loaded when the route is visited.
         component: () =>
-            import ( /* webpackChunkName: "about" */ "../views/SignUp.vue"),
-    },
+            import ( /* webpackChunkName: "SignUp" */ "../views/SignUp.vue"),
+    }, {
+        path: "/Authentification",
+        name: "Authentification",
+        // route level code-splitting
+        // this generates a separate chunk (about.[hash].js) for this route
+        // which is lazy-loaded when the route is visited.
+        component: () =>
+            import ( /* webpackChunkName: "about" */ "../views/Authentification.vue"),
+    }, {
+        path: "/Appointement",
+        name: "Appointement",
+        // route level code-splitting
+        // this generates a separate chunk (about.[hash].js) for this route
+        // which is lazy-loaded when the route is visited.
+        component: () =>
+            import ( /* webpackChunkName: "Appointement" */ "../views/Appointement.vue"),
+    }
 ]
 
 const router = createRouter({

@@ -5,27 +5,27 @@ class ApiAppointement
     public $user_reference;
     public $user_id;
 
-    public function checkUser()
-    {
+    // public function checkUser()
+    // {
 
-        // headers
-        header('Access-Control-Allow-Origin: *');
-        header('Access-Control-Allow-Credentials: true');
-        header('Access-Control-Allow-Methods:POST,GET');
-        header('Access-Control-Allow-Headers: content-type');
-        header('Content-Type: application/json');
+    //     // headers
+    //     header('Access-Control-Allow-Origin: *');
+    //     header('Access-Control-Allow-Credentials: true');
+    //     header('Access-Control-Allow-Methods:POST,GET');
+    //     header('Access-Control-Allow-Headers: content-type');
+    //     header('Content-Type: application/json');
 
 
-        // instantiate Database
-        $database = new Database();
-        $db = $database->connect();
+    //     // instantiate Database
+    //     $database = new Database();
+    //     $db = $database->connect();
 
-        // instantiate User object
-        $users = new Users($db);
+    //     // instantiate User object
+    //     $users = new Users($db);
 
-        // get raw posted data
-        $data = json_decode(file_get_contents("php://input"));
-    }
+    //     // get raw posted data
+    //     $data = json_decode(file_get_contents("php://input"));
+    // }
 
     public function createAnAppointement()
     {
@@ -239,24 +239,16 @@ class ApiAppointement
         $result = $Appointement->checkAvailableTimes($date);
 
         $num = $result->rowCount();
-        
-        $All_available_reservations = array();
-        
-        if ($num > 0) {
 
-            while ($rows = $result->fetch(PDO::FETCH_ASSOC)) {
-                $available_reservations = array(
-                    'start_at' => $rows["start_at"],
-                    'end_at' => $rows["end_at"]
-                );            
-                // Push to "data"
-                array_push($All_available_reservations, $available_reservations);
-        }
-        echo json_encode($All_available_reservations);
-        
-        }else{
+        $All_available_reservations = array();
+
+        if ($num > 0) {
+            $data = array("state" => true, "times" => $result->fetchAll(PDO::FETCH_ASSOC));
+            print_r(json_encode($data));
+            // echo json_encode($All_available_reservations);
+        } else {
             // there is no available dates 
-            $message = array("message" => "you dan't have any appointements");
+            $message = array("state" => false, "message" => "you dan't have any appointements");
             echo json_encode($message);
         }
     }

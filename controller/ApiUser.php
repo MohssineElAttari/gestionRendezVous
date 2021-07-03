@@ -124,50 +124,54 @@ class ApiUser
         // get raw posted data
         $data = json_decode(file_get_contents("php://input"));
 
-        if(!empty($data->userFirstName) && !empty($data->userLastName) && !empty($data->userCIN) && !empty($data->userEmail) ){
+        if (!empty($data->userFirstName) && !empty($data->userLastName) && !empty($data->userCIN) && !empty($data->userEmail)) {
 
             $user->userFirstName = $data->userFirstName;
             $user->userLastName = $data->userLastName;
             $user->userCIN = $data->userCIN;
             $user->userEmail = $data->userEmail;
-            
+
             /* $user->userPassword = $data->userPassword; */
-    
+
             // split string
             $arr1 = str_split($data->userFirstName, 2);
             $arr2 = str_split($data->userLastName, 2);
             $arr3 = str_split($data->userCIN, 2);
-    
+
             //Generate a random string.
             $token = openssl_random_pseudo_bytes(10);
-    
+
             //Convert the binary data into hexadecimal representation.
             $token = bin2hex($token);
-    
+
             // generate custom token
             $user->Reference = $arr1[0] . $arr2[0] . $arr3[0] . $token;
-    
+
             $u_arr = array();
             if ($user->create()) {
-    
-                $u_arr = array('message' => 'user iserted',
-                'state' => true,'reference'=>$user->Reference);
-    
+
+                $u_arr = array(
+                    'message' => 'user iserted',
+                    'state' => true, 'reference' => $user->Reference
+                );
+
                 echo json_encode($u_arr);
-    
             } else {
-    
-                $u_arr = array('message' => 'user note iserted',
-                'state' => false);
-    
+
+                $u_arr = array(
+                    'message' => 'user note iserted',
+                    'state' => false
+                );
+
                 echo json_encode($u_arr);
             }
-
-        }else{
-            $msg = array('message' => 'please fill all the fields');
+        } else {
+            $msg = array(
+                'message' => 'please fill all the fields',
+                'state' => "vide"
+            );
             echo json_encode($msg);
         }
-        
     }
 
     public function checkUser()
@@ -194,9 +198,17 @@ class ApiUser
         $userId = $user->checkUserExistence();
 
         if ($userId != false) {
-            echo json_encode($userId);
+            $u_arr = array(
+                'message' => 'user exist',
+                'state' => true, 'userId' => $userId
+            );
+            echo json_encode($u_arr);
         } else {
-            echo json_encode("there's no id");
+            $u_arr = array(
+                'message' => "there's no id",
+                'state' => false, 'userId' => null
+            );
+            echo json_encode($u_arr);
         }
     }
 }
