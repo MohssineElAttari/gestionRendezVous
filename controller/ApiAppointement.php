@@ -149,32 +149,32 @@ class ApiAppointement
         $database = new Database();
         $db = $database->connect();
 
-        // instantiate User object
-        $user = new Users($db);
+        // // instantiate User object
+        // $user = new Users($db);
 
-        $user->userId = $id;
+        // $user->userId = $id;
 
-        $result = $user->read_single();
+        // $result = $user->read_single();
 
         $userInfo = array();
-        $myInfo = array();
+        // $myInfo = array();
 
-        if ($result) {
-            $row = $result->fetch(PDO::FETCH_ASSOC);
-            extract($row);
+        // if ($result) {
+        //     $row = $result->fetch(PDO::FETCH_ASSOC);
+        //     extract($row);
 
-            $myInfo = array(
-                'userId' => $userId,
-                'userFirstName' => $userFirstName,
-                'userLastName' => $userLastName,
-                'userCIN' => $userCIN,
-                'userEmail' => $userEmail,
-                'Reference' => $Reference
-            );
-        }
+        //     $myInfo = array(
+        //         'userId' => $userId,
+        //         'userFirstName' => $userFirstName,
+        //         'userLastName' => $userLastName,
+        //         'userCIN' => $userCIN,
+        //         'userEmail' => $userEmail,
+        //         'Reference' => $Reference
+        //     );
+        // }
 
         // push myInfo to the global array userInfo 
-        array_push($userInfo, $myInfo);
+        // array_push($userInfo,);
         // instantiate appointement object
         $Appointement = new Appointements($db);
         //get the user_id_fk
@@ -191,12 +191,14 @@ class ApiAppointement
 
             while ($row = $appointement_result->fetch(PDO::FETCH_ASSOC)) {
                 extract($row);
-
                 $myAppointments = array(
-                    'userId_fk' => $userId_fk,
-                    'timeslot_id_fk' => $timeslot_id_fk,
+                    'appointement_id' => $appointement_id,
+                    'userFirstName' => $userFirstName,
+                    'userLastName' => $userLastName,
                     'user_subject' => html_entity_decode($user_subject),
-                    'c_date' => $c_date
+                    'c_date' => $c_date,
+                    'start_at' => $start_at,
+                    'end_at' => $end_at
                 );
 
                 // Push to "userInfo"

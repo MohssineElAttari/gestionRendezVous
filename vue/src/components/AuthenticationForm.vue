@@ -16,7 +16,6 @@ export default {
   data() {
     return {
       reference: "",
-      // userId: "",
     };
   },
   methods: {
@@ -30,10 +29,11 @@ export default {
       );
       if (res.data.state) {
         sessionStorage.setItem("userId", res.data.userId);
+        this.$router.push("/Authentification");
         // console.log(sessionStorage.getItem("userId"));
         // console.log(this.userId);
         this.userId = res.data.userId;
-        this.$router.push("/Authentification");
+        this.$router.push("/Appointement");
       }
     },
   },

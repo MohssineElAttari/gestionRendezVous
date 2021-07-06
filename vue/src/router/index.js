@@ -38,6 +38,14 @@ const routes = [{
         // which is lazy-loaded when the route is visited.
         component: () =>
             import ( /* webpackChunkName: "Appointement" */ "../views/Appointement.vue"),
+    }, {
+        path: "/Dashbord",
+        name: "Dashbord",
+        // route level code-splitting
+        // this generates a separate chunk (about.[hash].js) for this route
+        // which is lazy-loaded when the route is visited.
+        component: () =>
+            import ( /* webpackChunkName: "Appointement" */ "../views/Dashbord.vue"),
     }
 ]
 

@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <form class="form_container" @submit.prevent="valider()">
+    <form class="form_container" @submit.prevent="create()">
       <!-- @submit.prevent="valider" -->
       <div class="form_input_container">
         <label class="form_label" for="date">Date Of Appointement</label>
@@ -35,6 +35,8 @@
 <script>
 // import swal from "sweetalert";
 import axios from "axios";
+import swal from "sweetalert";
+
 export default {
   data() {
     return {
@@ -73,12 +75,22 @@ export default {
           c_date: this.dateOfAppointement,
         }
       );
-      console.log(await res);
+      console.log(res);
+      swal(
+        "Good job!",
+        "Congratulations ! Your information has been registered ! ",
+        "success"
+      );
+      (this.dateOfAppointement = ""),
+        (this.description = ""),
+        (this.times = "");
+        this.$router.push("/Dashbord");
     },
-    async valider() {
-      this.state = await this.getTimes();
+    
+    valider() {
+      // this.state
       //  console.log(this.state);
-      if (this.state) {
+      if (this.getTimes()) {
         this.create();
       }
     },
