@@ -26,7 +26,7 @@ Bonus1: Gérer les client (CRUD).
 
 Bonus2: Gérer l'authentification avec une API.
 
-<img src="vue/src/assets/SignUp .png">
+<img src="vue/src/assets/SignUp.png">
 <br>
 <img src="vue/src/assets/Authentication.png">
 <br>
