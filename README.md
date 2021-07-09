@@ -25,3 +25,18 @@ Vue.js
 Bonus1: Gérer les client (CRUD).
 
 Bonus2: Gérer l'authentification avec une API.
+
+<img src="vue/src/assets/SignUp.png">
+<br>
+<img src="vue/src/assets/Authentication.png">
+<br>
+<img src="vue/src/assets/Appointement.png">
+<br>
+<img src="vue/src/assets/Dashbord.png">
+<br>
+<img src="vue/src/assets/DashbordDelete.png">
+<br>
+<img src="vue/src/assets/DashbordD.png">
+<br>
+<img src="vue/src/assets/DashbordUpdate.png">
+<br>
