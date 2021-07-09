@@ -49,18 +49,39 @@ export default {
     };
   },
   methods: {
+    valideDate() {
+      var today = new Date();
+      var dd = String(today.getDate()).padStart(2, "0");
+      var mm = String(today.getMonth() + 1).padStart(2, "0");
+      var yyyy = today.getFullYear();
+      today = yyyy + "-" + mm + "-" + dd;
+      // console.log(new Date());
+      // console.log(today);
+      return today;
+    },
     async getTimes() {
-      console.log(document.getElementById("test").options);
-      // console.log(5555);
-      const res = await axios.post(
-        "http://localhost/gRendezVous/ApiAppointement/checkAvailableTimes",
-        {
-          c_date: this.dateOfAppointement,
-        }
-      );
-      console.log(res.data);
-      this.times = res.data.times;
-      return res.data.state;
+      // this.valideDate();
+      if (this.dateOfAppointement < this.valideDate()) {
+        console.log("wow");
+        swal({
+          title: "error!",
+          text: "The date you entered is invalid!",
+          icon: "error",
+          button: "ok!",
+        });
+      } else {
+        console.log(document.getElementById("test").options);
+        // console.log(5555);
+        const res = await axios.post(
+          "http://localhost/gRendezVous/ApiAppointement/checkAvailableTimes",
+          {
+            c_date: this.dateOfAppointement,
+          }
+        );
+        console.log(res.data);
+        this.times = res.data.times;
+        return res.data.state;
+      }
     },
     async create() {
       // this.resultat = await this.getTimes();
@@ -84,9 +105,12 @@ export default {
       (this.dateOfAppointement = ""),
         (this.description = ""),
         (this.times = "");
-        this.$router.push("/Dashbord");
+        if(res){
+      this.$router.push("/Dashbord");
+
+        }
     },
-    
+
     valider() {
       // this.state
       //  console.log(this.state);
@@ -96,6 +120,7 @@ export default {
     },
   },
 };
+// alert(this.valideDate());
 </script>
 
 <style>
@@ -130,14 +155,16 @@ export default {
   border-bottom: 2px solid #092dfa;
 }
 .form_input:focus {
-  border: 2px solid #1e2c7e;
+  border: 2px solid #0078de;
   outline: none;
 }
 .form_button {
   display: block;
   padding: 10px 20px;
-  background-color: #092dfa;
+  background-color: #0078de;
   border: none;
   border-radius: 20px;
+  color: white;
+  font-weight: bold;
 }
 </style>

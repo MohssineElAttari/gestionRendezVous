@@ -109,7 +109,7 @@ class Appointements
 
     public function getAppointements()
     {
-        $query = "SELECT a.appointement_id,u.userFirstName,u.userLastName,a.user_subject,a.c_date ,t.start_at,t.end_at from appointements AS a  INNER JOIN users AS u ON (a.userId_fk = u.userId) INNER JOIN timeslots t ON (a.timeslot_id_fk=t.timeslot_id) where a.userId_fk = :userId_fk";
+        $query = "SELECT a.appointement_id,u.userFirstName,u.userLastName,a.user_subject,a.c_date ,t.start_at,t.end_at from appointements AS a  INNER JOIN users AS u ON (a.userId_fk = u.userId) INNER JOIN timeslots t ON (a.timeslot_id_fk=t.timeslot_id) where a.userId_fk = :userId_fk order by a.appointement_id DESC";
 
         // prepare the query
         $stmt = $this->conn->prepare($query);

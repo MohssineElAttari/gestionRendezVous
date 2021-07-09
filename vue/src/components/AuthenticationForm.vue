@@ -79,14 +79,16 @@ export default {
   border-bottom: 2px solid #092dfa;
 }
 .form_input:focus {
-  border: 2px solid #1e2c7e;
+  border: 2px solid #0078de;
   outline: none;
 }
 .form_button {
   display: block;
   padding: 10px 20px;
-  background-color: #092dfa;
+  background-color: #0078de;
   border: none;
   border-radius: 20px;
+  color: white;
+  font-weight: bold;
 }
 </style>

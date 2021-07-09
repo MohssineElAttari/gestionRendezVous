@@ -17,7 +17,7 @@ export default {
 
 <style>
 .auth {
-  background-image: url("../assets/hannah.jpg");
+  background-image: url("../assets/paul.jpg");
   height: 820px;
   padding: 20px;
 }
